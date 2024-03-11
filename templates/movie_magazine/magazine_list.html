@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>
+    Magazine list
+    <a href="{% url 'movie_magazine:magazine-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+{#  <form method="get" action="" class="form-inline">#}
+{#      {{ search_form|crispy }}#}
+{#      <input class="btn-secondary" type="submit" value="🔎">#}
+{#  </form>#}
+  {% if magazine_list %}
+    <ul>
+      {% for magazine in magazine_list %}
+        <li>
+          <a href="{% url "taxi:car-detail" pk=magazine.id %}">{{ magazine.id }}</a>
+          {{ magazine.title }} ({{ magazine.topic.name }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no magazines...</p>
+  {% endif %}
+{% endblock %}
