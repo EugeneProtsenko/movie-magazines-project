@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>The Last Critic Agency</h1>
+    <p>What you watch, what you are!</p>
+    <h2>Dynamic content</h2>
+    <p>The critic service has the following record counts:</p>
+    <ul>
+        <li><strong>Magazines:</strong> {{ num_magazines }}</li>
+        <li><strong>Critics:</strong> {{ num_critics }}</li>
+        <li><strong>Topics:</strong> {{ num_topics }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
