@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 class Topic(models.Model):
@@ -22,13 +23,16 @@ class Critic(AbstractUser):
     def __str__(self):
         return f"{self.username} ({self.first_name} {self.last_name})"
 
+    def get_absolute_url(self):
+        return reverse("movie_magazine:critic-detail", kwargs={"pk": self.pk})
+
 
 class Magazine(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     published_date = models.DateField()
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
-    publishers = models.ManyToManyField(Critic, related_name="magazines")
+    critics = models.ManyToManyField(Critic, related_name="magazines")
 
     def __str__(self):
         return self.title
