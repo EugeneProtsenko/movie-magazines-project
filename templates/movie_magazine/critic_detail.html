@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Username: {{ critic.username }}
+    <a href="{% url 'movie_magazine:critic-delete' pk=critic.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'movie_magazine:critic-update' pk=critic.id %}" class="btn btn-secondary link-to-page">
+      Update years of experience
+    </a>
+  </h1>
+
+  <p><strong>First name:</strong> {{ critic.first_name }}</p>
+  <p><strong>Last name:</strong> {{ critic.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ critic.years_of_experience }}</p>
+  <p><strong>Is staff:</strong> {{ critic.is_staff }}</p>
+
+  <div class="ml-3">
+    <h4>Magazines</h4>
+
+    {% for magazine in critic.magazines.all %}
+        <hr>
+        <p><strong>Title:</strong> {{ magazine.title }}</p>
+        <p><strong>Topic:</strong> {{ magazine.topic.name }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{magazine.id}}</p>
+
+    {% empty %}
+      <p>No critics!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

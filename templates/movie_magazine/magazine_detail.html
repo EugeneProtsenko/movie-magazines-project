@@ -12,9 +12,9 @@
     </a>
   </h1>
   <p>Topic: ({{ magazine.topic.name }})</p>
+  <p>{{ magazine.content }}</p>
+  <hr>
   <h1>
-    Critics
-
     {% if magazine in user.magazines.all %}
       <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-danger link-to-page">
         Delete me from this magazine
@@ -24,9 +24,8 @@
         Assign me from this magazine
       </a>
     {% endif %}
-
   </h1>
-  <hr>
+  <h5>Critics</h5>
   <ul>
     {% for critic in magazine.critics.all %}
       <li>{{ critic.username }} ({{ critic.first_name }} {{ critic.last_name }})</li>
