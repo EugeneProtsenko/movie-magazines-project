@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from movie_magazine.forms import MagazineForm, CriticCreationForm, CriticYearUpdateForm
 from movie_magazine.models import Critic, Magazine, Topic
 
 
@@ -65,13 +66,13 @@ class MagazineDetailView(LoginRequiredMixin, generic.DetailView):
 
 class MagazineCreateView(LoginRequiredMixin, generic.CreateView):
     model = Magazine
-    # form_class = MagazineForm
+    form_class = MagazineForm
     success_url = reverse_lazy("movie_magazine:magazine-list")
 
 
 class MagazineUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Magazine
-    # form_class = MagazineForm
+    form_class = MagazineForm
     success_url = reverse_lazy("movie_magazine:magazine-list")
 
 
@@ -92,12 +93,12 @@ class CriticDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CriticCreateView(LoginRequiredMixin, generic.CreateView):
     model = Critic
-    # form_class = CriticCreationForm
+    form_class = CriticCreationForm
 
 
 class CriticYearUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Critic
-    # form_class = CriticYearUpdateForm
+    form_class = CriticYearUpdateForm
     success_url = reverse_lazy("movie_magazine:critic-list")
 
 
