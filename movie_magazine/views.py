@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from movie_magazine.forms import MagazineForm, CriticCreationForm, CriticYearUpdateForm
+from movie_magazine.forms import MagazineForm, CriticCreationForm, CriticYearUpdateForm, TopicSearchForm, \
+    MagazineSearchForm, CriticSearchForm
 from movie_magazine.models import Critic, Magazine, Topic
 
 
@@ -36,6 +37,22 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     template_name = "movie_magazine/topic_list.html"
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TopicListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = TopicSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Topic.objects.all()
+        form = TopicSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(name__icontains=form.cleaned_data["name"])
+        return queryset
+
 
 class TopicCreateView(LoginRequiredMixin, generic.CreateView):
     model = Topic
@@ -56,8 +73,23 @@ class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class MagazineListView(LoginRequiredMixin, generic.ListView):
     model = Magazine
-    queryset = Magazine.objects.select_related("topic")
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(MagazineListView, self).get_context_data(**kwargs)
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = MagazineSearchForm(
+            initial={"title": title}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Magazine.objects.select_related("topic")
+        form = MagazineSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(title__icontains=form.cleaned_data["title"])
+        return queryset
 
 
 class MagazineDetailView(LoginRequiredMixin, generic.DetailView):
@@ -84,6 +116,24 @@ class MagazineDeleteView(LoginRequiredMixin, generic.DeleteView):
 class CriticListView(LoginRequiredMixin, generic.ListView):
     model = Critic
     paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(CriticListView, self).get_context_data(**kwargs)
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = CriticSearchForm(
+            initial={"username": username}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Critic.objects.all()
+        form = CriticSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
+        return queryset
 
 
 class CriticDetailView(LoginRequiredMixin, generic.DetailView):
