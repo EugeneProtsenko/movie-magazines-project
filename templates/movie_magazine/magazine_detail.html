@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ magazine.title }}
+    <a href="{% url 'movie_magazine:magazine-delete' pk=magazine.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'movie_magazine:magazine-update' pk=magazine.id %}" class="btn btn-secondary link-to-page">
+      Update
+    </a>
+  </h1>
+  <p>Topic: ({{ magazine.topic.name }})</p>
+  <h1>
+    Critics
+
+    {% if magazine in user.magazines.all %}
+      <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-danger link-to-page">
+        Delete me from this magazine
+      </a>
+    {% else %}
+      <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-success link-to-page">
+        Assign me from this magazine
+      </a>
+    {% endif %}
+
+  </h1>
+  <hr>
+  <ul>
+    {% for critic in magazine.critics.all %}
+      <li>{{ critic.username }} ({{ critic.first_name }} {{ critic.last_name }})</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

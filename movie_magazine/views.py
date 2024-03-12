@@ -104,3 +104,15 @@ class CriticYearUpdateView(LoginRequiredMixin, generic.UpdateView):
 class CriticDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Critic
     success_url = reverse_lazy("")
+
+
+@login_required
+def toggle_assign_to_magazine(request, pk):
+    critic = Critic.objects.get(id=request.user.id)
+    if (
+        Magazine.objects.get(id=pk) in critic.magazines.all()
+    ):
+        critic.magazines.remove(pk)
+    else:
+        critic.magazines.add(pk)
+    return HttpResponseRedirect(reverse_lazy("movie_magazine:magazine-detail", args=[pk]))

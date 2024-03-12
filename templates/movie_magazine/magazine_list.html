@@ -16,7 +16,7 @@
     <ul>
       {% for magazine in magazine_list %}
         <li>
-          <a href="{% url "taxi:car-detail" pk=magazine.id %}">{{ magazine.id }}</a>
+          <a href="{% url "movie_magazine:magazine-detail" pk=magazine.id %}">{{ magazine.id }}</a>
           {{ magazine.title }} ({{ magazine.topic.name }})
         </li>
       {% endfor %}
