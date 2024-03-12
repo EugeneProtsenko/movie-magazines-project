@@ -28,7 +28,7 @@
           {% for critic in critic_list %}
             <tr>
               <td>{{ critic.id }}</td>
-              <td><a href="{{ critic.get_absolute_url }}">{{ critic.username }} {% if user == critic %} (Me){% endif %}</a></td>
+              <td><a href="{{ critic.get_absolute_url }}" class="grey-link">{{ critic.username }} {% if user == critic %} (Me){% endif %}</a></td>
               <td>{{ critic.first_name }}</td>
               <td>{{ critic.last_name }}</td>
               <td>{{ critic.years_of_experience }}</td>

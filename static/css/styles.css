@@ -6,3 +6,28 @@ body {
     float: right;
     margin: 0 2px 0 2px;
 }
+
+.btn-custom {
+    background-color: black;
+    color: white;
+}
+
+
+.grey-link {
+    color: #63666A;
+}
+
+.list-group-item-action.active {
+    background-color: #63666A;
+    border-color: #63666A;
+}
+
+
+.page-item.active .page-link {
+    background-color: #63666A;
+    border-color: #63666A;
+}
+
+.page-link {
+    color: #000000;
+}
