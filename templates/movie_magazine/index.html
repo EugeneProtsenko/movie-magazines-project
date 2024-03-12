@@ -1,18 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>The Last Critic Agency</h1>
-    <p>What you watch, what you are!</p>
-    <h2>Dynamic content</h2>
-    <p>The critic service has the following record counts:</p>
-    <ul>
-        <li><strong>Magazines:</strong> {{ num_magazines }}</li>
-        <li><strong>Critics:</strong> {{ num_critics }}</li>
-        <li><strong>Topics:</strong> {{ num_topics }}</li>
-    </ul>
+    <div class="container">
+        <h1 class="display-4 text-center my-5">The Last Critic Agency</h1>
+        <p class="lead text-center">What you watch, what you are!</p>
 
-    <p>You have visited this page
-        {{ num_visits }} time{{ num_visits|pluralize }}.
-    </p>
+        <h2 class="text-center my-4">Dynamic content</h2>
+        <p class="text-center">The critic service has the following record counts:</p>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title"><strong>Magazines:</strong> {{ num_magazines }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title"><strong>Critics:</strong> {{ num_critics }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h3 class="card-title"><strong>Topics:</strong> {{ num_topics }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <p class="text-center my-5">You have visited this page
+            {{ num_visits }} time{{ num_visits|pluralize }}.
+        </p>
+    </div>
 {% endblock %}

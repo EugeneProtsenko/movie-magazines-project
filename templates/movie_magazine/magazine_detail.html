@@ -1,34 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
-    {{ magazine.title }}
-    <a href="{% url 'movie_magazine:magazine-delete' pk=magazine.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-
-    <a href="{% url 'movie_magazine:magazine-update' pk=magazine.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
-  <p>Topic: ({{ magazine.topic.name }})</p>
-  <p>{{ magazine.content }}</p>
-  <hr>
-  <h1>
-    {% if magazine in user.magazines.all %}
-      <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-danger link-to-page">
-        Delete me from this magazine
-      </a>
-    {% else %}
-      <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-success link-to-page">
-        Assign me from this magazine
-      </a>
-    {% endif %}
-  </h1>
-  <h5>Critics</h5>
-  <ul>
-    {% for critic in magazine.critics.all %}
-      <li>{{ critic.username }} ({{ critic.first_name }} {{ critic.last_name }})</li>
-    {% endfor %}
-  </ul>
+  <div class="container">
+    <h1 class="display-4 text-center my-5">{{ magazine.title }}</h1>
+    <div class="text-center mb-4">
+      <a href="{% url 'movie_magazine:magazine-delete' pk=magazine.id %}" class="btn btn-danger">Delete</a>
+      <a href="{% url 'movie_magazine:magazine-update' pk=magazine.id %}" class="btn btn-secondary ml-2">Update</a>
+    </div>
+    <p class="lead text-center">Topic: ({{ magazine.topic.name }})</p>
+    <p class="text-center">{{ magazine.content }}</p>
+    <hr>
+    <div class="text-center mb-4">
+      {% if magazine in user.magazines.all %}
+        <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-danger">Delete me from this magazine</a>
+      {% else %}
+        <a href="{% url 'movie_magazine:toggle-magazine-assign' pk=magazine.id %}" class="btn btn-secondary">Assign me from this magazine</a>
+      {% endif %}
+    </div>
+    <h5 class="text-center">Critics</h5>
+    <ul class="list-group">
+      {% for critic in magazine.critics.all %}
+        <li class="list-group-item">{{ critic.username }} ({{ critic.first_name }} {{ critic.last_name }})</li>
+      {% empty %}
+        <li class="list-group-item">No critics</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

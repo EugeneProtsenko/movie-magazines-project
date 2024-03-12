@@ -2,49 +2,40 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-  <h1>
-    Topic List
-    <a href="{% url 'movie_magazine:topic-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
-  <form method="get" action="" class="form-inline">
+  <div class="container">
+    <h1 class="display-4 text-center my-5">Topic List</h1>
+    <div class="text-center mb-4">
+      <a href="{% url 'movie_magazine:topic-create' %}" class="btn btn-dark">Create</a>
+    </div>
+    <form method="get" action="" class="form-inline justify-content-center mb-4">
       {{ search_form|crispy }}
-      <input class="btn-secondary" type="submit" value="🔎">
-  </form>
-  {% if topic_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
-      {% for topic in topic_list %}
-        <tr>
-          <td>
-              {{ topic.id }}
-          </td>
-          <td>
-              {{ topic.name }}
-          </td>
-          <td>
-              <a href="{% url 'movie_magazine:topic-update' pk=topic.id %}">
-                Update
-              </a>
-            </td>
-            <td>
-              <a style="color: red"
-                href="{% url 'movie_magazine:topic-delete' pk=topic.id %}">
-                Delete
-              </a>
-            </td>
-        </tr>
-      {% endfor %}
-    </table>
-
-  {% else %}
-      <p>There are no topics in the service.</p>
-  {% endif %}
+      <input class="btn btn-secondary ml-2" type="submit" value="Search">
+    </form>
+    {% if topic_list %}
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for topic in topic_list %}
+            <tr>
+              <td>{{ topic.id }}</td>
+              <td>{{ topic.name }}</td>
+              <td><a href="{% url 'movie_magazine:topic-update' pk=topic.id %}" class="btn btn-secondary">Update</a></td>
+              <td><a href="{% url 'movie_magazine:topic-delete' pk=topic.id %}" class="btn btn-dark">Delete</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning" role="alert">
+        There are no topics in the service.
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
