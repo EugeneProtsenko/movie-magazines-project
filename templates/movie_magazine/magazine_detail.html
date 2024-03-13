@@ -18,7 +18,7 @@
       {% endif %}
     </div>
     <h5 class="text-center">Critics</h5>
-    <ul class="list-group">
+    <ul class="list-group critic-list">
       {% for critic in magazine.critics.all %}
         <li class="list-group-item">{{ critic.username }} ({{ critic.first_name }} {{ critic.last_name }})</li>
       {% empty %}
