@@ -31,24 +31,17 @@ class PrivateTopicTests(TestCase):
         topics = Topic.objects.all()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            list(response.context["topic_list"]),
-            list(topics)
-        )
+        self.assertEqual(list(response.context["topic_list"]), list(topics))
         self.assertTemplateUsed(response, "movie_magazine/topic_list.html")
 
     def test_topic_list_search(self):
-        Topic.objects.create(
-            name="test_name"
-        )
-        Topic.objects.create(
-            name="Drama"
-        )
+        Topic.objects.create(name="test_name")
+        Topic.objects.create(name="Drama")
         response = self.client.get(TOPICS_URL, {"name": "test_name"})
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             list(response.context["topic_list"]),
-            list(Topic.objects.filter(name="test_name"))
+            list(Topic.objects.filter(name="test_name")),
         )
 
 
@@ -67,20 +60,15 @@ class PrivateMagazineTests(TestCase):
         self.client.force_login(self.user)
 
     def test_retrieve_magazine_list(self):
-        topic = Topic.objects.create(
-            name="test_name"
-        )
+        topic = Topic.objects.create(name="test_name")
         magazine1 = Magazine.objects.create(
-            title="test1",
-            content="test123",
-            published_date="2020-05-02",
-            topic=topic
+            title="test1", content="test123", published_date="2020-05-02", topic=topic
         )
         magazine2 = Magazine.objects.create(
             title="test2",
             content="test123342",
             published_date="2021-05-02",
-            topic=topic
+            topic=topic,
         )
         magazine1.critics.add(self.user)
         magazine2.critics.add(self.user)
@@ -88,10 +76,7 @@ class PrivateMagazineTests(TestCase):
         magazines = Magazine.objects.all()
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(
-            list(response.context["magazine_list"]),
-            list(magazines)
-        )
+        self.assertEqual(list(response.context["magazine_list"]), list(magazines))
         self.assertTemplateUsed(response, "movie_magazine/magazine_list.html")
 
     def test_magazine_list_search(self):
@@ -105,18 +90,20 @@ class PrivateMagazineTests(TestCase):
             title="test12",
             content="test12312",
             published_date="2021-05-02",
-            topic=topic)
+            topic=topic,
+        )
         Magazine.objects.create(
             title="new test",
             content="test1231sdfd2",
             published_date="2012-05-02",
-            topic=topic2)
+            topic=topic2,
+        )
         response = self.client.get(MAGAZINES_URL, {"title": "test_title"})
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
             list(response.context["magazine_list"]),
-            list(Magazine.objects.filter(title="test_title"))
+            list(Magazine.objects.filter(title="test_title")),
         )
 
 
@@ -146,18 +133,11 @@ class PrivateCriticTests(TestCase):
 
     def test_critic_search(self):
         Critic.objects.create(
-            username="test_driver1",
-            password="passowrd12345",
-            years_of_experience=10
+            username="test_driver1", password="passowrd12345", years_of_experience=10
         )
         Critic.objects.create(
-            username="test_driver2",
-            password="passowrd12342",
-            years_of_experience=11
+            username="test_driver2", password="passowrd12342", years_of_experience=11
         )
         response = self.client.get(CRITICS_URL, {"username": "critic"})
         critics = Critic.objects.filter(username__icontains="critic")
-        self.assertEqual(
-            list(response.context["critic_list"]),
-            list(critics)
-        )
+        self.assertEqual(list(response.context["critic_list"]), list(critics))

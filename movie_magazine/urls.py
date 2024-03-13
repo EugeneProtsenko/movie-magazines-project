@@ -1,21 +1,23 @@
 from django.urls import path
 
-from movie_magazine.views import (index,
-                                  TopicListView,
-                                  TopicCreateView,
-                                  TopicUpdateView,
-                                  TopicDeleteView,
-                                  MagazineListView,
-                                  MagazineDetailView,
-                                  MagazineCreateView,
-                                  MagazineUpdateView,
-                                  MagazineDeleteView,
-                                  CriticListView,
-                                  CriticDetailView,
-                                  CriticCreateView,
-                                  CriticYearUpdateView,
-                                  CriticDeleteView,
-                                  toggle_assign_to_magazine)
+from movie_magazine.views import (
+    index,
+    TopicListView,
+    TopicCreateView,
+    TopicUpdateView,
+    TopicDeleteView,
+    MagazineListView,
+    MagazineDetailView,
+    MagazineCreateView,
+    MagazineUpdateView,
+    MagazineDeleteView,
+    CriticListView,
+    CriticDetailView,
+    CriticCreateView,
+    CriticYearUpdateView,
+    CriticDeleteView,
+    toggle_assign_to_magazine,
+)
 
 
 urlpatterns = [
@@ -27,17 +29,23 @@ urlpatterns = [
     path("magazines/", MagazineListView.as_view(), name="magazine-list"),
     path("magazines/<int:pk>/", MagazineDetailView.as_view(), name="magazine-detail"),
     path("magazines/create/", MagazineCreateView.as_view(), name="magazine-create"),
-    path("magazines/<int:pk>/update/", MagazineUpdateView.as_view(), name="magazine-update"),
-    path("magazines/<int:pk>/delete/", MagazineDeleteView.as_view(), name="magazine-delete"),
+    path(
+        "magazines/<int:pk>/update/",
+        MagazineUpdateView.as_view(),
+        name="magazine-update",
+    ),
+    path(
+        "magazines/<int:pk>/delete/",
+        MagazineDeleteView.as_view(),
+        name="magazine-delete",
+    ),
     path(
         "magazines/<int:pk>/toggle-assign/",
         toggle_assign_to_magazine,
         name="toggle-magazine-assign",
     ),
     path("critics/", CriticListView.as_view(), name="critic-list"),
-    path(
-        "critics/<int:pk>/", CriticDetailView.as_view(), name="critic-detail"
-    ),
+    path("critics/<int:pk>/", CriticDetailView.as_view(), name="critic-detail"),
     path("critics/create/", CriticCreateView.as_view(), name="critic-create"),
     path(
         "critics/<int:pk>/update/",

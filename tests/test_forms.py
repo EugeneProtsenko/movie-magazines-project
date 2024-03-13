@@ -3,7 +3,8 @@ from django.test import TestCase
 from movie_magazine.forms import (
     CriticCreationForm,
     CriticYearUpdateForm,
-    CriticSearchForm)
+    CriticSearchForm,
+)
 from movie_magazine.models import Critic
 
 
@@ -25,15 +26,13 @@ class CriticCreationFormTest(TestCase):
 class CriticYearUpdateFormTest(TestCase):
     def setUp(self):
         self.critic = Critic.objects.create_user(
-            username="testcritic",
-            password="12345",
-            years_of_experience=8
+            username="testcritic", password="12345", years_of_experience=8
         )
 
     def test_form_critic_update_is_valid(self):
         form = CriticYearUpdateForm(
-            instance=self.critic,
-            data={"years_of_experience": 8})
+            instance=self.critic, data={"years_of_experience": 8}
+        )
         self.assertTrue(form.is_valid())
 
 
