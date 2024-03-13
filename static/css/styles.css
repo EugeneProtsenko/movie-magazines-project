@@ -1,6 +1,43 @@
 body {
     margin-top: 20px;
+    color: white;
+
 }
+
+.card {
+    background-color: rgba(255, 255, 255, 0.5); /* This will make the background of the card semi-transparent */
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.8); /* This will make the background of the list items semi-transparent */
+}
+
+
+.col-md-4 {
+    color: initial;
+}
+
+.table tbody {
+    color: white;
+}
+
+body::after {
+    content: "";
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('../images/godard-4.jpeg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    z-index: -1;
+}
+
 
 .link-to-page {
     float: right;
@@ -14,7 +51,7 @@ body {
 
 
 .grey-link {
-    color: #63666A;
+    color: white;
 }
 
 .list-group-item-action.active {
@@ -30,4 +67,8 @@ body {
 
 .page-link {
     color: #000000;
+}
+
+.critic-list .list-group-item {
+    color: black;
 }
