@@ -6,11 +6,15 @@
       <a href="{{ user.get_absolute_url }}" class="list-group-item list-group-item-action active grey-link">
         User: {{ user.get_username }}
       </a>
-      <a href="{% url 'logout' %}?next={{request.path}}" class="list-group-item list-group-item-action">Logout</a>
+      <form action="{% url 'logout' %}" method="POST" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <span>Logout</span>
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Logout</button>
+      </form>
     {% else %}
       <a href="{% url 'login' %}?next={{request.path}}" class="list-group-item list-group-item-action">Login</a>
     {% endif %}
-
     <a href="{% url 'movie_magazine:index' %}" class="list-group-item list-group-item-action">Home</a>
     <a href="{% url 'movie_magazine:critic-list' %}" class="list-group-item list-group-item-action">All Critics</a>
     <a href="{% url 'movie_magazine:magazine-list' %}" class="list-group-item list-group-item-action">All Magazines</a>
