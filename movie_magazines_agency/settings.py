@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") != "False"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "movie-magazines-project.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "movie-magazines-project.onrender.com"]
 
 
 # Application definition
